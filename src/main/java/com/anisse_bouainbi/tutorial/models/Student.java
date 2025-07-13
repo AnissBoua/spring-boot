@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table
+@Table(name = "students")
 @JsonIgnoreProperties(ignoreUnknown = true) // Ignore additional fields when converting from JSON
 public class Student {
     @Id
@@ -27,6 +28,9 @@ public class Student {
     private Long id;
     private String name;
     private String email;
+
+    @Column(name = "date_of_birth")
     private LocalDate dob;
+    
     private Integer age; 
 }
