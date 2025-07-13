@@ -1,29 +1,19 @@
 package com.anisse_bouainbi.tutorial;
 
-import javax.sql.DataSource;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.jdbc.core.JdbcTemplate;
 
+import io.github.cdimascio.dotenv.Dotenv;
 @SpringBootApplication
-public class TutorialApplication implements CommandLineRunner {
-
-	private final DataSource source;
-
-	public TutorialApplication(final DataSource source) {
-		this.source = source;
-	}
-
+public class TutorialApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(TutorialApplication.class, args);
-	}
+		Dotenv dotenv = Dotenv.load();
 
-	@Override
-	public void run(final String... args) {
-		System.out.println("Datasource : " + source.toString());
-		final JdbcTemplate template = new JdbcTemplate(source);
-		template.execute("select 1");
+        System.setProperty("DB_URL", dotenv.get("DB_URL"));
+        System.setProperty("DB_USER", dotenv.get("DB_USER"));
+        System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+
+		SpringApplication.run(TutorialApplication.class, args);
 	}
 }
