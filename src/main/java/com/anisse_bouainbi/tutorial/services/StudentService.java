@@ -22,6 +22,10 @@ public class StudentService {
         return repo.findAll();
 	}
 
+    public Student getStudent(Long id) {
+        return repo.findById(id).orElseThrow(() -> new IllegalStateException("Student with id " + id + " does not exist"));
+	}
+
     public Student create(Student student) {
         Optional<Student> res = repo.findStudentByEmail(student.getEmail());
         if (res.isPresent()) return res.get();

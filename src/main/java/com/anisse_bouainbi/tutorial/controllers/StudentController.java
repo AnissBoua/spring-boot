@@ -30,6 +30,11 @@ public class StudentController {
 		return service.getStudents();
 	}
 
+	@GetMapping("/{id}")
+	public Student get(@PathVariable("id") Long id) {
+		return service.getStudent(id);
+	}
+
     @PostMapping("/")
 	public Student create(@RequestBody Student student) {
 		return service.create(student);
